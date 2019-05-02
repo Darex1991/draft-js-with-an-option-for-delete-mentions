@@ -98,8 +98,7 @@ export default class CustomMentionEditor extends Component {
     const { editorState } = this.state;
     const contentState = editorState.getCurrentContent();
     const selectionState = editorState.getSelection();
-    const selectionKey = selectionState.getAnchorKey();
-    const block = contentState.getBlockForKey(selectionKey);
+    const block = mentionProps.children[0].props.block;
     const blockKey = block.getKey();
     const getBlock = getRangesForDraftEntity(block, mentionProps.entityKey);
 
