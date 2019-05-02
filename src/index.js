@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const title = 'My Minimal React Webpack Babel Setup';
+import Mention from './mention';
 
 ReactDOM.render(
-  <div>{title}</div>,
+  <Mention />,
   document.getElementById('app')
 );
 

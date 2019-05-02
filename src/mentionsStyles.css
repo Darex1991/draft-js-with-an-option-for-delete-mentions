@@ -1,0 +1,68 @@
+.mention {
+  color: #4a85bb;
+  text-decoration: none;
+}
+
+.mentionSuggestions {
+  background: #fff;
+  border-radius: 2px;
+  border-top: 1px solid #eee;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  margin: -16px;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  transform-origin: 50% 0;
+  transform: scaleY(0);
+}
+
+.mentionSuggestionsEntryContainer {
+  display: table;
+  width: 100%;
+}
+
+.mentionSuggestionsEntryContainerLeft,
+.mentionSuggestionsEntryContainerRight {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.mentionSuggestionsEntryContainerRight {
+  padding-left: 8px;
+  width: 100%;
+}
+
+.mentionSuggestionsEntry {
+  padding: 7px 10px 3px 10px;
+  transition: background-color 0.4s cubic-bezier(.27, 1.27, .48, .56);
+}
+
+.mentionSuggestionsEntry:active {
+  background-color: #cce7ff;
+}
+
+.mentionSuggestionsEntryFocused {
+  composes: mentionSuggestionsEntry;
+  background-color: #e6f3ff;
+}
+
+.mentionSuggestionsEntryText,
+.mentionSuggestionsEntryTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mentionSuggestionsEntryTitle {
+  color: #a7a7a7;
+  font-size: 80%;
+}
+
+.mentionSuggestionsEntryAvatar {
+  border-radius: 50%;
+  display: block;
+  height: 30px;
+  width: 30px;
+}

@@ -1,0 +1,16 @@
+.mention-button {
+  position: relative;
+}
+
+.mention-button button {
+  opacity: 0;
+  position:absolute;
+  right: -5px;
+  top: -5px;
+  visibility: hidden;
+}
+
+.mention-button:hover button {
+  opacity: 1;
+  visibility: visible;
+}
