@@ -16,8 +16,8 @@
 
 ## Installation
 
-* `git clone git@github.com:rwieruch/minimal-react-webpack-babel-setup.git`
-* cd minimal-react-webpack-babel-setup
+* `git clone git@github.com:Darex1991/draft-js-with-an-option-for-delete-mentions.git`
+* cd draft-js-with-an-option-for-delete-mentions
 * npm install
 * npm start
 * visit `http://localhost:8080/`
