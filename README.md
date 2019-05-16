@@ -1,6 +1,6 @@
 # Draft-js with an option for delete mentions
 
-![Demo](https://github.com/Darex1991/draft-js-with-an-option-for-delete-mentions/blob/master/demo.gif)
+![Demo](https://github.com/Darex1991/draft-js-with-an-option-for-delete-mentions/blob/master/demo2.gif)
 
 ## Features
 
