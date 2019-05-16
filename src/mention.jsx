@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import {
-  EditorState,
-  SelectionState,
-  Modifier,
   convertFromRaw,
+  EditorState,
+  Modifier,
+  SelectionState,
 } from 'draft-js';
-
-import getRangesForDraftEntity from 'draft-js/lib/getRangesForDraftEntity';
-import Editor from 'draft-js-plugins-editor';
 import createMentionPlugin, { defaultSuggestionsFilter } from 'draft-js-mention-plugin';
+import Editor from 'draft-js-plugins-editor';
+import getRangesForDraftEntity from 'draft-js/lib/getRangesForDraftEntity';
+import _ from 'lodash';
+
 import mentions from './mentions';
 import initialValue from './initialValue.json';
+
 import './editorStyles.css';
 import './mentionsStyles.css';
 import './button.css';
@@ -69,8 +71,8 @@ export default class CustomMentionEditor extends Component {
       positionSuggestions,
       mentionPrefix: '',
       mentionTrigger: '@',
-      supportWhitespace: true,
-      mentionComponent: (mentionProps, b, c, d) => {
+      supportWhitespace: false,
+      mentionComponent: (mentionProps) => {
         return (
           <span
             className={`${mentionProps.className} mention-button`}
@@ -91,29 +93,31 @@ export default class CustomMentionEditor extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
     this.focus = this.focus.bind(this);
+
+    this.editor = React.createRef();
   }
 
   delete(event, mentionProps) {
-    event.stopPropagation();
+    _.invoke(event, 'stopPropagation');
+
     const { editorState } = this.state;
     const contentState = editorState.getCurrentContent();
-    const selectionState = editorState.getSelection();
-    const block = mentionProps.children[0].props.block;
+    const block = _.get(mentionProps, ['children', 0, 'props', 'block']);
     const blockKey = block.getKey();
     const getBlock = getRangesForDraftEntity(block, mentionProps.entityKey);
 
     const entitySelection = new SelectionState({
-      anchorOffset: getBlock.start,
       anchorKey: blockKey,
-      focusOffset: getBlock.end,
+      anchorOffset: getBlock.start,
       focusKey: blockKey,
+      focusOffset: getBlock.end,
+      hasFocus: true,
       isBackward: false,
-      hasFocus: selectionState.getHasFocus(),
     });
 
     const setEntityPositionFromClickedButton = entitySelection.merge({
-      anchorOffset: getBlock[0].start,
-      focusOffset: getBlock[0].end,
+      anchorOffset: _.get(_.first(getBlock), 'start'),
+      focusOffset: _.get(_.first(getBlock), 'end'),
     });
 
     const textWithoutRange = Modifier.removeRange(contentState, setEntityPositionFromClickedButton, 'backward');
@@ -128,8 +132,10 @@ export default class CustomMentionEditor extends Component {
   };
 
   onSearchChange({ value }) {
+    const suggestions = defaultSuggestionsFilter(value, mentions);
+
     this.setState({
-      suggestions: defaultSuggestionsFilter(value, mentions),
+      suggestions,
     });
   };
 
@@ -144,18 +150,16 @@ export default class CustomMentionEditor extends Component {
 
     return (
       <div>
-        <h1>Hover mention for delete it</h1>
+        <h1>Hover mention for delete token</h1>
         <div className="editor" onClick={this.focus}>
           <Editor
-            editorState={this.state.editorState}
             className="textarea__field"
+            cols={cols}
+            editorState={this.state.editorState}
             onChange={this.onChange}
             plugins={plugins}
+            ref={this.editor}
             rows={rows}
-            cols={cols}
-            ref={element => {
-              this.editor = element;
-            }}
           />
           <MentionSuggestions
             onSearchChange={this.onSearchChange}

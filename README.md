@@ -1,8 +1,4 @@
-# minimal-react-webpack-babel-setup
-
-[![Build Status](https://travis-ci.org/rwieruch/minimal-react-webpack-babel-setup.svg?branch=master)](https://travis-ci.org/rwieruch/minimal-react-webpack-babel-setup) [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/) [![Greenkeeper badge](https://badges.greenkeeper.io/rwieruch/minimal-react-webpack-babel-setup.svg)](https://greenkeeper.io/)
-
-Read more about it: [The Minimal React Webpack Babel Setup](https://www.robinwieruch.de/minimal-react-webpack-babel-setup/)
+# Draft-js with an option for delete mentions
 
 ## Features
 
@@ -10,6 +6,11 @@ Read more about it: [The Minimal React Webpack Babel Setup](https://www.robinwie
 * Webpack 4
 * Babel 7
 * Hot Module Replacement
+
+* draft-js
+* draft-js-mention-plugin
+* draft-js-plugins-editor
+* lodash
 
 ## Installation
 
